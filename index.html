@@ -1,1 +1,185 @@
-Coming Soon!
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<html>
+  <link href="style.css" type="text/css" rel="stylesheet" />
+  <head>
+    <title>Visual Memory for Robust Path Following</title>
+  </head>
+  <meta content="Maps and Landmarks" property="og:title" />
+</html>
+<body>
+  <center>
+    <table width="1000px">
+      <tr>
+        <td>
+          <center>
+            <span style="font-size:42px">Visual Memory for Robust Path Following</span>
+          </center>
+          <br />
+        </td>
+      </tr>
+      <tr align="center">
+        <td>
+          <table width="80%">
+            <tr>
+              <td width="19%">
+                <center>
+                  <span style="font-size:20px">
+                    <a href="https://ashishkumar1993.github.io/">Ashish Kumar*</a>
+                  </span>
+                </center>
+              </td>
+
+              <td width="19%">
+                <center>
+                  <span style="font-size:20px">
+                    <a href="https://people.eecs.berkeley.edu/~sgupta">Saurabh Gupta*</a>
+                  </span>
+                </center>
+              </td>
+              <td width="19%">
+                <center>
+                  <span style="font-size:20px">
+                    <a href="https://people.eecs.berkeley.edu/~dfouhey">David Fouhey</a>
+                  </span>
+                </center>
+              </td>
+              <td width="19%">
+                <center>
+                  <span style="font-size:20px">
+                    <a href="https://people.eecs.berkeley.edu/~svlevine">Sergey Levine</a>
+                  </span>
+                </center>
+              </td>
+              <td width="19%">
+                <center>
+                  <span style="font-size:20px">
+                    <a href="https://people.eecs.berkeley.edu/~malik">Jitendra Malik</a>
+                  </span>
+                </center>
+              </td>
+            </tr>
+          </table>
+          <br />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <center>
+            <span style="font-size:20px">University of California at Berkeley</span>
+          </center>
+          <br />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <center>
+                <img src="./resources/images/teaser.jpg" width="80%" />
+                </center>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <center>
+                  <span style="font-size:14px">
+                  <i><span style='font-weight:bold'>Problem Setup:</span> Given
+                  a set of reference images and poses, the starting image and
+                  pose, and a goal pose, we want a policy π that is able to
+                  convey the robot from its current pose to the target pose
+                  using first person RGB image observations under noisy
+                  actuation.</i>
+                  </span>
+                </center>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td>
+Humans routinely retrace paths in a novel environment both forwards and backwards despite uncertainty in their motion. This paper presents an approach for doing so. Given a demonstration of a path, a first network generates a path abstraction. Equipped with this abstraction, a second network observes the world and decides how to act to retrace the path under noisy actuation and a changing environment. The two networks are optimized end-to-end at training time. We evaluate the method in two realistic simulators, performing path following and homing under actuation noise and environmental changes. Our experiments show that our approach outperforms classical approaches and other learning based baselines.
+<br /><br /><hr /></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <center>
+            <h1>Paper</h1>
+            <table width="100%">
+              <tr>
+                <td width="30%">
+                  <a href="https://arxiv.org/pdf/1712.08125.pdf">
+                    <img src="./resources/images/teaser.jpg" width="100%" />
+                  </a>
+                </td>
+                <td width="2%"></td>
+                <td width="60%"><b>Unifying Map and Landmark Based
+                Representations for Visual Navigation<br /></b>
+                Ashish Kumar*, Saurabh Gupta*, David Fouhey, 
+                Sergey Levine, Jitendra Malik<br />arXiv 2017<br>
+                To appear at NeurIPS 2018 (Oral)<br/>
+                <a href="./resources/bibtex.bib">bibtex</a></td>
+              </tr>
+            </table>
+          </center>
+          <br />
+          <hr />
+        </td>
+      </tr>
+      <tr>
+        <td>
+        
+        <h4>Results</h4>
+        
+        <p style="text-indent: 40px">
+        We present a video visualization for the path following experiments. On the left
+        is the overhead view (<b>which the agent does not have access to</b>). In the middle
+        is the demonstration, which the agent has to follow (either forwards or backwards).
+        On the right is the execution as done by the agent. 
+        <br/><br/>
+
+        First, we show following a path forwards.
+        <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media1.mp4'></video>
+        <br/><br/><br/>
+
+        Next, we show following a path backwards. Note the fact that there are two doors. To successfully retrace
+        the path backwards, the agent must identify which door it came out of.
+        <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media2.mp4'></video><br/><br/>
+        <br/><br/><br/>
+
+        Finally, we show executing a path with the world changing in between demonstration and execution (note that the
+        bed is missing). Here we show both open loop as well as our proposed method. 
+
+        <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media3.mp4'></video><br/>
+
+        </p>
+
+   
+    <!--
+    <table><tr><td width="49%"><iframe src="https://www.youtube.com/embed/UoX3DAkxaSA?ecver=1" height="300" width="490" allowfullscreen="1" gesture="media" allow="encrypted-media" frameborder="0"></iframe></td><td width="2%"></td><td width="49%"><iframe src="https://www.youtube.com/embed/W9nWp9HN3V8?ecver=1" height="300" width="490" allowfullscreen="1" gesture="media" allow="encrypted-media" frameborder="0"></iframe></td></tr></table><br />
+    
+    
+    --> 
+    <hr /></td>
+      </tr>
+
+
+
+      <tr>
+        <td>
+          <center>
+            <h1>Acknowledgments</h1>
+            <table width="100%">
+              <tr>
+                <td width="100%">This work was supported in part by Intel/NSF VEC award IIS-1539099, and the Google Fellowship to SG.This webpage template was borrowed from some <a href="https://richzhang.github.io/colorization/">colorful folks.</a></td>
+              </tr>
+            </table>
+          </center>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
