@@ -118,7 +118,7 @@ Humans routinely retrace paths in a novel environment both forwards and backward
                 <td width="2%"></td>
                 <td width="60%"><b>Visual Memory for Robust Path Following<br /></b>
                 Ashish Kumar*, Saurabh Gupta*, David Fouhey, Sergey Levine, Jitendra Malik<br />
-                To appear at NeurIPS 2018 (Oral)<br/> <br/>
+                To appear at NeurIPS 2018 <span style='color:#a00;font-weight:bold'>(Oral)</span><br/> <br/>
                 <a href="./resources/bibtex.bib">bibtex</a> / 
                 <a href="https://saurabhg.web.illinois.edu/pdfs/kumar2018visual.pdf">pdf</a></td>
               </tr>
@@ -128,17 +128,37 @@ Humans routinely retrace paths in a novel environment both forwards and backward
           <hr />
         </td>
       </tr>
+
+      <tr><td>
+      <center><h1>What's the problem?</h1></centeR>
+
+      <img src='resources/images/fig1.png' width='100%'><br/><br/>
+        <p>
+        The main idea is that we are given a <b>single</b> demonstration of a path consisting of observations and
+        actions. Our goal is to re-execute this path either forwards (i.e.,
+        following it) or backwards (i.e., homing behavior). The difficulty is that
+        as we execute this path, our actions are <b>noisy</b> and the world may <b>change</b>
+        in the meantime. Both mean that blind replay of actions will not succeed --
+        if we simply replay the actions, we may end up somewhere else (try going from your
+        bed to your office while blindfolded) or we may end up bumping into things (the
+        pedestrians you avoided yesterday are not in the same place today). 
+        </p>
+        <p>
+        The paper presents a method, described below, that aims to solve this task and compares
+        it with alternate approaches on two environments.
+        </p>
+      <hr/>
+      </td></tr>
       <tr>
         <td>
-        
-        <h4>Results</h4>
+        <center><h1>Results</h1></center>
         
         <p style="text-indent: 40px">
         We present a video visualization for the path following experiments. On the left
         is the overhead view (<b>which the agent does not have access to</b>). In the middle
         is the demonstration, which the agent has to follow (either forwards or backwards).
         On the right is the execution as done by the agent. 
-        <br/><br/>
+        <br/><br/><br/>
 
         First, we show following a path forwards.
         <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media1.mp4'></video>
@@ -146,7 +166,7 @@ Humans routinely retrace paths in a novel environment both forwards and backward
 
         Next, we show following a path backwards. Note the fact that there are two doors. To successfully retrace
         the path backwards, the agent must identify which door it came out of.
-        <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media2.mp4'></video><br/><br/>
+        <video width='100%' controls> <source src='http://web.eecs.umich.edu/~fouhey/TEMP/RPF//Media2.mp4'></video>
         <br/><br/><br/>
 
         Finally, we show executing a path with the world changing in between demonstration and execution (note that the
@@ -164,6 +184,48 @@ Humans routinely retrace paths in a novel environment both forwards and backward
     --> 
     <hr /></td>
       </tr>
+
+      <tr><td>
+        <center><h1>How does it work?</h1></center>
+        <img src='resources/images/fig2.png' width='100%'><br/><br/>
+
+        <p>
+        The method contains two components: a network set of networks
+        &phi; and &Psi; that abstract
+        the image observations seen while the path is demonstrated into a series
+        of vectors that are easily digested by a learning method;
+        and a recurrent network &pi; that attends to this sequence
+        of vectors, looks through the camera, and chooses an action. 
+        </p>    
+
+        <p>
+        The job of &phi; and &Psi; is to convert the image and action observations 
+        from the path demonstration into something a learning system can handle.
+        It consists of a CNN, &phi; that is applied to each image, as well a two layer 
+        fully-connected network &Psi; that blends together image and action observations.
+        </p>
+
+        <p>
+        The job of &pi; is to use the path abstraction to re-execute the path
+        under noisy actuation and a changing world, and is implemented as a
+        GRU. As input, &pi; looks at the image, its previous state, and the path
+        abstraction. Rather than look at all of the images at once, &pi; has a pointer
+        &eta; into the abstraction that it uses to softly attend to the steps of the 
+        execution. As it executes the path, &pi; updates where this pointer &eta; is
+        pointing.  
+        </p>
+
+        <p>
+        The entire system is end-to-end trainable from data. We train it using 
+        imitation learning on 120K episodes. Each episode consists of a 30 step path which
+        the agent is given 40 steps to execute (each step is ~40cm).
+
+        </p>
+
+
+      
+      <hr/> 
+      </td></br>
 
 
 
