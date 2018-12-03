@@ -141,7 +141,7 @@ Humans routinely retrace paths in a novel environment both forwards and backward
         in the meantime. Both mean that blind replay of actions will not succeed --
         if we simply replay the actions, we may end up somewhere else (try going from your
         bed to your office while blindfolded) or we may end up bumping into things (the
-        pedestrians you avoided yesterday are not in the same place today). 
+        pedestrians you walked around yesterday are not in the same place today). 
         </p>
         <p>
         The paper presents a method, described below, that aims to solve this task and compares
@@ -190,7 +190,7 @@ Humans routinely retrace paths in a novel environment both forwards and backward
         <img src='resources/images/fig2.png' width='100%'><br/><br/>
 
         <p>
-        The method contains two components: a network set of networks
+        The method contains two components: networks
         &phi; and &Psi; that abstract
         the image observations seen while the path is demonstrated into a series
         of vectors that are easily digested by a learning method;
@@ -200,25 +200,28 @@ Humans routinely retrace paths in a novel environment both forwards and backward
 
         <p>
         The job of &phi; and &Psi; is to convert the image and action observations 
-        from the path demonstration into something a learning system can handle.
+        from the path demonstration into something a learning system can handle, or 
+        a <i>path abstraction</i>.
         It consists of a CNN, &phi; that is applied to each image, as well a two layer 
         fully-connected network &Psi; that blends together image and action observations.
+        This produces a matrix with as many rows as there were steps in the demonstration.
         </p>
 
         <p>
-        The job of &pi; is to use the path abstraction to re-execute the path
+        The job of &pi; is to use the generated <i>path abstraction</i> to re-execute the path
         under noisy actuation and a changing world, and is implemented as a
         GRU. As input, &pi; looks at the image, its previous state, and the path
-        abstraction. Rather than look at all of the images at once, &pi; has a pointer
+        abstraction. Rather than look at all of the steps of the path at once, &pi; has a pointer
         &eta; into the abstraction that it uses to softly attend to the steps of the 
-        execution. As it executes the path, &pi; updates where this pointer &eta; is
+        execution. At each step, &pi; predicts an update to where this pointer &eta; is
         pointing.  
         </p>
 
         <p>
         The entire system is end-to-end trainable from data. We train it using 
         imitation learning on 120K episodes. Each episode consists of a 30 step path which
-        the agent is given 40 steps to execute (each step is ~40cm).
+        the agent is given 40 steps to execute (each step is 40cm forwards or a 30&deg; rotation 
+        in expectation).
 
         </p>
 
